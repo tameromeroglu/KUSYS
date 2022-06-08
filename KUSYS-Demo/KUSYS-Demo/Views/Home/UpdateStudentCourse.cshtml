@@ -1,0 +1,93 @@
+﻿@using KUSYS_Demo.Business.DTOs
+@model KUSYS_Demo.Business.DTOs.StudentsCoursesDto
+
+@{
+    ViewData["Title"] = "UpdateStudentCourse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<CourseDto> list = ViewBag.list;
+}
+
+
+
+<h1>Update Student Course</h1>
+
+<div>
+
+    <h5>Update Student</h5>
+    <br />
+
+
+    <form asp-controller="Home" asp-action="UpdateStudentCourse" method="post">
+
+        <div class="form-group">
+
+            <label class="small mb-1" asp-for="Id">Student Id</label>
+            <input class="form-control py-4" asp-for="Id" type="text" readonly />
+
+
+        </div>
+
+        <div class="form-group">
+
+            <label class="small mb-1" asp-for="FirstName">First Name</label>
+            <input class="form-control py-4" asp-for="FirstName" type="text" readonly />
+
+
+        </div>
+
+        <div class="form-group">
+
+            <label class="small mb-1" asp-for="LastName">Last Name</label>
+            <input class="form-control py-4" asp-for="LastName" type="text" readonly />
+
+        </div>
+
+        <div class="form-group">
+
+            <label class="small mb-1" asp-for="CourseId">Course Id</label>
+            <input class="form-control py-4" asp-for="CourseId" type="text" id="courseId" readonly />
+            <span asp-validation-for="CourseId" class="text-danger"></span>
+
+
+        </div>
+
+        <div class="form-group">
+
+            <label class="small mb-1" asp-for="CourseName">Course Name</label>
+            <select asp-for="CourseName">
+
+                <option value="">Please select one</option>
+                @foreach (var item in @list)
+                {
+                    <option value="@item.CourseId">@item.CourseName</option>
+                }
+            </select>
+
+            @*      <label class="small mb-1" asp-for="CourseName">Course Name</label>
+                <input class="form-control py-4" asp-for="CourseName" type="text"  readonly/>*@
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>
+
+<script type="text/javascript" src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+
+      $('select').on('change', function() {
+
+            
+            $('#courseId').val(this.value)
+          });
+
+</script>
+
+
+@section scripts{
+
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    }
+
+

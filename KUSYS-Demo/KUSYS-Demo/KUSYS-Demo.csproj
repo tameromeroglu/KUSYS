@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>KUSYS_Demo</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Controllers\HomeController.cs~RF784410c0.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.5" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
+
+	  <InternalsVisibleTo Include="KUSYS-Demo.Test" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KUSYS-Demo.Business\KUSYS-Demo.Business.csproj" />
+    <ProjectReference Include="..\KUSYS-Demo.Data\KUSYS-Demo.Data.csproj" />
+    <ProjectReference Include="..\KUSYS-Demo.Entity\KUSYS-Demo.Entity.csproj" />
+  </ItemGroup>
+
+</Project>

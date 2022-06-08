@@ -1,0 +1,148 @@
+﻿@model IEnumerable<KUSYS_Demo.Business.DTOs.StudentDto>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (Context.User.IsInRole("Admin"))
+{
+    <div class="text-right">
+        <a class="btn btn-primary btn-icon-split" asp-controller="Home" asp-action="NewStudent">
+
+            <span class="text">New Student</span>
+        </a>
+    </div>
+}
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Students List</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th> @Html.DisplayNameFor(model => model.Id)</th>
+                        <th> @Html.DisplayNameFor(model => model.FirstName)</th>
+                        <th> @Html.DisplayNameFor(model => model.LastName)</th>
+                        <th> @Html.DisplayNameFor(model => model.BirthDate)</th>
+                        <th></th>
+                        @if (Context.User.IsInRole("Admin"))
+                        {
+                            <th>
+
+                            </th>
+                            <th>
+
+                            </th>
+                        }
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td> @Html.DisplayFor(modelItem => item.Id)</td>
+                            <td> @Html.DisplayFor(modelItem => item.FirstName)</td>
+                            <td> @Html.DisplayFor(modelItem => item.LastName)</td>
+                            <td> @Html.DisplayFor(modelItem => item.BirthDate)</td>
+                            <td>
+                                <button class="btn btn-info btn-icon-split" style="width:100%" data-toggle="modal" data-target="#exampleModal" data-id=@item.Id id="popup">
+                                    <span class="text">Details</span>
+                                </button>
+
+                            </td>
+                            @if (Context.User.IsInRole("Admin"))
+                            {
+                                <th>
+                                    <a class="btn btn-warning btn-icon-split" style="width:100%" asp-controller="Home" asp-action="UpdateStudent" asp-route-id=@item.Id>
+                                        <span class="text">Update</span>
+                                    </a>
+                                </th>
+                                <th>
+                                    <a class="btn btn-danger btn-icon-split" style="width:100%" onclick="DeleteStudent(@item.Id,'@item.FirstName'+ ' ' +'@item.LastName')">
+                                        <span class="text">Delete</span>
+                                    </a>
+                                </th>
+                            }
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Student Detail</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalbody">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+
+    $(document).on("click","#dataTable tbody tr td button.btn", function() {
+
+      var id = $(this).data("id")
+
+        $.ajax({
+        url: "@Url.Action("studentdetail","Home")",
+        type: "GET",
+        data: { id: id },
+        dataType: 'html',
+        success: function(data) {
+            $("#modalbody").html(data);
+           console.log(data)
+        }
+        });
+    });
+
+
+    function DeleteStudent(id,student) {
+    debugger;
+    var isAllow = window.confirm(student + " contact will be deleted.");
+    
+    if (isAllow) {
+        $.ajax({
+           url: "@Url.Action("DeleteStudent","Home")",
+           type: "DELETE",
+           data: { id: id },
+           success: function(data) {
+                
+                if (!data.success) {
+                    alert(data.message);
+                }
+                else {
+                    window.location.reload();
+                }
+            }
+        })
+    }
+}
+
+</script>
+
+

@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>KUSYS_Demo.Business</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Validation\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KUSYS-Demo.Data\KUSYS-Demo.Data.csproj" />
+  </ItemGroup>
+
+</Project>

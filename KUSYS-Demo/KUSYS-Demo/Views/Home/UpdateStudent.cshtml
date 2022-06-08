@@ -1,0 +1,71 @@
+﻿@model KUSYS_Demo.Business.DTOs.StudentDetailDto
+
+@{
+    ViewData["Title"] = "Updatetudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+
+    <h5>Update Student</h5>
+    <br />
+
+
+    <form asp-controller="Home" asp-action="UpdateStudent" method="post">
+
+          <div class="form-group">
+
+            <label class="small mb-1" asp-for="Id">Student Id</label>
+            <input class="form-control py-4" asp-for="Id" type="text" value=@Model.Id  readonly/>
+
+
+        </div>
+
+        <div class="form-group">
+
+            <label class="small mb-1" asp-for="FirstName">First Name</label>
+            <input class="form-control py-4" asp-for="FirstName" type="text"  readonly/>
+
+
+        </div>
+
+        <div class="form-group">
+
+            <label class="small mb-1" asp-for="LastName">Last Name</label>
+            <input class="form-control py-4" asp-for="LastName" type="text"  readonly/>
+
+        </div>
+
+        <div class="form-group">
+
+            <label class="small mb-1" asp-for="BirthDate">Birth Date</label>
+            <input class="form-control py-4" asp-for="BirthDate" type="date"  readonly/>
+
+        </div>
+
+        <div class="form-group">
+
+            <label class="small mb-1" asp-for="PhoneNumber">Phone Number</label>
+            <input class="form-control py-4" asp-for="PhoneNumber" type="text" placeholder="Enter Phone Number" />
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-group">
+
+            <label class="small mb-1" asp-for="Adress">Address</label>
+            <input class="form-control py-4" asp-for="Adress" type="text" placeholder="Enter Address" />
+            <span asp-validation-for="Adress" class="text-danger"></span>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>
+
+  @section scripts{
+
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    }
+

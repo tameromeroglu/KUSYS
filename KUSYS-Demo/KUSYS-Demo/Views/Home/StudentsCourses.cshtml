@@ -1,0 +1,58 @@
+﻿@model IEnumerable<KUSYS_Demo.Business.DTOs.StudentsCoursesDto>
+
+@{
+    ViewData["Title"] = "StudentsCourses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Students Courses</h1>
+
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Students List</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th> @Html.DisplayNameFor(model => model.Id)</th>
+                        <th> @Html.DisplayNameFor(model => model.FirstName)</th>
+                        <th> @Html.DisplayNameFor(model => model.LastName)</th>
+                        <th> @Html.DisplayNameFor(model => model.CourseId)</th>
+                        <th> @Html.DisplayNameFor(model => model.CourseName)</th>
+                        <th>
+
+                        </th>
+                        
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td> @Html.DisplayFor(modelItem => item.Id)</td>
+                            <td> @Html.DisplayFor(modelItem => item.FirstName)</td>
+                            <td> @Html.DisplayFor(modelItem => item.LastName)</td>
+                            <td> @Html.DisplayFor(modelItem => item.CourseId)</td>
+                            <td> @Html.DisplayFor(modelItem => item.CourseName)</td>
+                            <td>
+                            
+                                <a class="btn btn-warning btn-icon-split" style="width:100%" asp-controller="Home" asp-action="UpdateStudentCourse" asp-route-id=@item.Id>
+                                    <span class="text">Update</span>
+                                </a>
+
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
